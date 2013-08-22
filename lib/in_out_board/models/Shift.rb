@@ -2,12 +2,9 @@ module InOutBoard
   class Shift
     attr_accessor :weekday, :shift_start, :shift_end
     def initialize(wd=nil,ss=nil,se=nil)
-      wd = Time.now.wday if wd.nil?
-      ss = ShiftTime.new if ss.nil?
-      se = ShiftTime.new if se.nil?
-      self.weekday=wd
-      self.shift_start=ss
-      self.shift_end=se
+      self.weekday     = wd ||= Time.now.wday
+      self.shift_start = ss ||= ShiftTime.new
+      self.shift_end   = se ||= ShiftTime.new
     end
 
     # Set the weekday for the shift, raising an error if it is not a
@@ -32,7 +29,7 @@ module InOutBoard
     end
 
     def covers?(t)
-      (@shift_start.to_time .. @shift_end.to_time).cover?(t)
+      (@shift_start.to_time ... @shift_end.to_time).cover?(t)
     end
 
   end
