@@ -11,10 +11,7 @@ module InOutBoard
 
     # convert the object to a Time object based on the current date
     def to_time(t=nil)
-      if t.nil?
-        t=Time.now
-      end
-
+      t ||=Time.now
       Time.new(t.year,t.month,t.day,@hours,@minutes,0)
     end
   end
